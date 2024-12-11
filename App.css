@@ -1,0 +1,162 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #F5F7F8;
+}
+
+*,
+*::before {
+  box-sizing: border-box;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  /*گرید سه در سه میسازه*/
+  width: 306px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #333333;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell.x,
+.cell.o {
+  cursor: not-allowed;
+  /*برای تنظسمات هاور است*/
+}
+
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+
+.cell:nth-child(3n+1) {
+  border-left: none;
+}
+
+.cell:nth-child(3n) {
+  border-right: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9) {
+  border-bottom: none;
+}
+
+/*ساخت ضربدر*/
+.cell.x::before,
+.cell.x::after {
+  content: "";
+  width: 15%;
+  height: 60%;
+  background-color: #000;
+  position: absolute;
+}
+
+.cell.x::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after {
+  transform: rotate(-45deg);
+}
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+  content: "";
+  width: 15%;
+  height: 60%;
+  background-color: #dadada;
+  position: absolute;
+}
+
+.board.x .cell:hover::before {
+  transform: rotate(45deg);
+}
+
+.board.x .cell:hover::after {
+  transform: rotate(-45deg);
+}
+
+/*ساختo*/
+.cell.o::before,
+.cell.o::after {
+  content: "";
+  width: 70%;
+  height: 70%;
+  background-color: #000;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.cell.o::after {
+  width: 65%;
+  height: 65%;
+  background-color: #fff;
+}
+
+.board.o .cell:not(.x):not(.o):hover:before,
+.board.o .cell:not(.x):not(.o):hover:after {
+  content: "";
+  width: 70%;
+  height: 70%;
+  background-color: #dadada;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.board.o .cell:not(.x):not(.o):hover::after {
+  width: 65%;
+  height: 65%;
+  background-color: #fff;
+}
+
+.victory-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(58, 58, 58, 0.9);
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 3.5rem;
+  color: #fff;
+}
+
+.victory-modal.show {
+  display: flex;
+}
+
+.victory-modal .restart-Btn {
+  width: 15rem;
+  height: 5rem;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all .6s ease-in-out;
+}
+
+.victory-modal .restart-Btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.difficulty-selector label {
+  letter-spacing: 1px;
+}
